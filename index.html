@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zayneb Hashmi's Birthday Surprise</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0b0711;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        
+        #countdown-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .countdown-container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .title-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #d1b3ff;
+            text-shadow: 0 0 15px rgba(209, 179, 255, 0.6);
+        }
+
+        .heart {
+            color: #c299ff;
+            font-size: 1.8rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #b3b3b3;
+            margin-bottom: 40px;
+        }
+
+        .timer-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .time-box {
+            background-color: #16121e;
+            border: 1px solid #251c33;
+            border-radius: 12px;
+            width: 130px;
+            padding: 20px 10px;
+        }
+
+        .number {
+            font-size: 3.2rem;
+            color: #c299ff;
+            margin-bottom: 8px;
+        }
+
+        .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #8c8894;
+        }
+
+        .separator {
+            font-size: 2.5rem;
+            color: #c299ff;
+            padding-bottom: 25px;
+        }
+
+        .footer-date {
+            font-size: 1.05rem;
+            color: #b3b3b3;
+        }
+
+        
+        #surprise-activation-zone {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .show-surprise-btn {
+            background: linear-gradient(135deg, #3d1b5c, #1f0d33);
+            border: 2px solid #c299ff;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px rgba(194, 153, 255, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .show-surprise-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(194, 153, 255, 0.8);
+        }
+
+        .hint-text {
+            color: #8c8894;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        
+        #surprise-screen {
+            display: none; 
+            min-height: 100vh;
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('jung.png') no-repeat center center/cover;
+            padding-bottom: 90px; 
+        }
+
+        .birthday-layout {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px;
+            min-height: calc(100vh - 90px);
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+       
+        .left-side {
+            flex: 1;
+            min-width: 320px;
+            max-width: 500px;
+        }
+
+        
+        .message-card {
+            background: rgba(22, 18, 30, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(194, 153, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .sender-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid #82ccdd;
+            object-fit: cover;
+        }
+
+        .sender-text p {
+            font-size: 0.85rem;
+            color: #8c8894;
+        }
+
+        .sender-text h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #82ccdd;
+        }
+
+        .quote-text {
+            color: #d1d1d1;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            text-align: center;
+            position: relative;
+        }
+
+       
+        .music-player-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #0d0914;
+            border-top: 1px solid #1f172a;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .track-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .track-thumb {
+            width: 45px;
+            height: 45px;
+            border-radius: 6px;
+            background-color: #251c33;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.3rem;
+        }
+
+        .play-btn {
+            background: white;
+            color: black;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+     
+        .flower {
+            position: absolute;
+            top: -20px;
+            color: #ffb6c1; 
+            font-size: 1.5rem;
+            pointer-events: none;
+            animation: fall linear infinite;
+            z-index: 99;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+      
+        @media (max-width: 768px) {
+            .birthday-layout { padding: 20px; justify-content: center; }
+            .music-player-bar { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+<audio id="bg-music" src="Majboor.mp3" loop></audio>
+    <!-- ================= پہلا پیج: کاؤنٹ ڈاؤن اسکرین ================= -->
+    <div id="countdown-screen">
+        <div class="countdown-container">
+            <div class="title-container">
+                <span class="heart">💜</span>
+                <h1 class="main-title">Something Special is Coming...</h1>
+                <span class="heart">💜</span>
+            </div>
+
+            <p class="subtitle">Countdown to Zayneb Hashmi's Special Day 💜</p>
+
+            <!-- ٹائمر زون (جب تک وقت باقی ہے) -->
+            <div class="timer-display" id="main-timer">
+                <div class="time-box">
+                    <div class="number" id="days">00</div>
+                    <div class="label">Days</div>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-box">
+                    <div class="number" id="hours">00</div>
+                    <div class="label">Hours</div>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-box">
+                    <div class="number" id="minutes">00</div>
+                    <div class="label">Minutes</div>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-box">
+                    <div class="number" id="seconds">00</div>
+                    <div class="label">Seconds</div>
+                </div>
+            </div>
+
+            <!-- سرپرائز بٹن زون (ٹائمر ختم ہونے پر جاوا اسکرپٹ اسے شو کرے گا) -->
+            <div id="surprise-activation-zone">
+                <button class="show-surprise-btn" onclick="revealSurprise()">
+                    <span>▶</span> SHOW SURPRISE <span>🎵</span>
+                </button>
+                <p class="hint-text">💜 Click the button for your surprise! 💜</p>
+            </div>
+
+            <div class="footer-date" id="footer-date-text">
+                Mark Your Calendar: 1 August 2026 📅
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= دوسرا پیج: برتھ ڈے سرپرائز اسکرین ================= -->
+    <div id="surprise-screen">
+        <div class="birthday-layout">
+            
+            <!-- بائیں طرف والا حصہ (جونگ کوک امیج کی جگہ ہم ٹیکسٹ ہولڈر دے رہے ہیں) -->
+            <div class="left-side">
+                <!-- یہاں آپ اپنی برتھ ڈے کیک اور جونگ کوک والی اوورلے امیج ایڈ کر سکتے ہیں -->
+                <h2 style="font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: #ffb6c1; text-shadow: 0 0 10px rgba(255,182,193,0.5);">
+                    Happy Birthday Zayneb Hashmi 🎂
+                </h2>
+            </div>
+
+            <!-- دائیں طرف والا میسج کارڈ (Catnoir والا) -->
+            <div class="message-card">
+                <div class="sender-info">
+                    <img src="download (1).png" alt="Catnoir" class="avatar" onerror="this.src='https://via.placeholder.com/70/green';">
+                    <div class="sender-text">
+                        <p>A message from</p>
+                        <h3>your catnoir 🐾</h3>
+                    </div>
+                </div>
+                <div class="quote-text">
+                    <p style="color: #82ccdd; font-size: 1.5rem; margin-bottom: 10px;">“</p>
+                    <p>happy birthday to you alot my ladybug💗</p>
+                    <p>sorry not mine but my bestfriend🦋</p>
+                    <p>hoping you a miraculous life in future ✨</p>
+                    <p>congratulations on becoming 18 🎉</p>
+                    <p style="color: #82ccdd; font-size: 1.5rem; margin-top: 10px;">”</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- نچلا میوزک پلیئر بار -->
+        <div class="music-player-bar">
+            <div class="track-info">
+                <div class="track-thumb"></div>
+                <div>
+                    <h4 style="font-size: 0.9rem;">Majboor</h4>
+                    <p style="font-size: 0.75rem; color: #8c8894;">Shehryar Rehan & Zoha Waseem</p>
+                </div>
+            </div>
+            <div class="player-controls">
+                <span>⏮</span>
+                <div class="play-btn">⏸</div>
+                <span>⏭</span>
+            </div>
+            <div style="color: #8c8894; font-size: 1.1rem;">🔊 ───⚪──────</div>
+        <div class="play-btn" id="music-toggle-btn" style="cursor: pointer;">▶</div>
+		</div>
+    </div>
+
+
+    <!-- ================= جاوا اسکرپٹ لاجک ================= -->
+    <script>
+        // ٹارگٹ ٹائم: 1st August 2026, 12:00 AM (رات کے 12 بجے)
+        const targetDate = new Date("June 27, 2026 07:30:00").getTime();
+
+        const countdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            // حساب کتاب
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            // ٹائمر اپڈیٹ کرنا
+            if(difference > 0) {
+                document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+                document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+                document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+                document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+            }
+
+            // جیسے ہی 1st August 12:00 AM ہوگا
+            if (difference <= 0) {
+                clearInterval(countdownInterval);
+                
+                // ٹائمر اور کیلنڈر ٹیکسٹ چھپائیں
+                document.getElementById("main-timer").style.display = "none";
+                document.getElementById("footer-date-text").style.display = "none";
+                
+                // "SHOW SURPRISE" بٹن ظاہر کریں
+                document.getElementById("surprise-activation-zone").style.display = "block";
+            }
+        }, 1000);
+
+        // بٹن پر کلک کرنے کے بعد کا فنکشن
+        function revealSurprise() {
+            // پہلا پیج غائب کریں
+            document.getElementById("countdown-screen").style.display = "none";
+            
+            // سرپرائز والا پیج دکھائیں
+            const surpriseScreen = document.getElementById("surprise-screen");
+            surpriseScreen.style.display = "block";
+            
+            // پھول گرانے والا فنکشن شروع کریں
+            startFlowerFall();
+        }
+
+        // گلابی پھول (Pink Flowers Effect) بنانے کا لاجک
+        function startFlowerFall() {
+            const flowerSymbols = ['🌸', '💮', '🌹', '🌺'];
+            
+            setInterval(() => {
+                const flower = document.createElement('div');
+                flower.classList.add('flower');
+                
+                // رینڈم پھول اور پوزیشنز
+                flower.innerText = flowerSymbols[Math.floor(Math.random() * flowerSymbols.length)];
+                flower.style.left = Math.random() * 100 + 'vw';
+                flower.style.animationDuration = Math.random() * 3 + 2 + 's'; // 2s سے 5s کے درمیان گرنے کی سپیڈ
+                flower.style.fontSize = Math.random() * 15 + 15 + 'px'; // رینڈم سائز
+                
+                document.getElementById("surprise-screen").appendChild(flower);
+                
+                // کچھ دیر بعد پھول کو ڈوم (DOM) سے ریموو کر دیں تاکہ میموری فل نہ ہو
+                setTimeout(() => {
+                    flower.remove();
+                }, 5000);
+            }, 300); // ہر 300 ملی سیکنڈ بعد نیا پھول گرے گا
+        }
+    const music = document.getElementById("bg-music");
+const musicBtn = document.getElementById("music-toggle-btn");
+
+// جب کوئی پلیئر کے بٹن پر کلک کرے گا
+musicBtn.addEventListener("click", function() {
+    if (music.paused) {
+        music.play();
+        musicBtn.innerText = "⏸"; // گانا چل پڑے گا اور آئیکن بدل جائے گا
+    } else {
+        music.pause();
+        musicBtn.innerText = "▶"; // گانا رک جائے گا
+    }
+});
+
+// جب زینب "SHOW SURPRISE" پر کلک کرے گی، تو گانا خود بخود شروع ہو جائے گا
+function revealSurprise() {
+    document.getElementById("countdown-screen").style.display = "none";
+    document.getElementById("surprise-screen").style.display = "block";
+    
+    music.play(); // گانا آٹو پلے کرنے کے لیے
+    musicBtn.innerText = "⏸";
+
+    startFlowerFall();
+}
+	</script>
+</body>
+</html>
