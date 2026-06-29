@@ -377,7 +377,7 @@
 
             <!-- سرپرائز بٹن زون (ٹائمر ختم ہونے پر جاوا اسکرپٹ اسے شو کرے گا) -->
             <div id="surprise-activation-zone">
-                <button class="show-surprise-btn" onclick="revealSurprise()">
+               <button class="show-surprise-btn" onclick="openHeadphoneModal()">
                     <span>▶</span> SHOW SURPRISE <span>🎵</span>
                 </button>
                 <p class="hint-text">💜 Click the button for your surprise!💜</p>
@@ -501,27 +501,26 @@ You know, your family was absolutely right—you really are a problem. 😜 But 
             // سرپرائز والا پیج دکھائیں
             const surpriseScreen = document.getElementById("surprise-screen");
             surpriseScreen.style.display = "block";
-            // جب کوئی مین بٹن پر کلک کرے گا، تو یہ پاپ اپ کھولے گا
-function openHeadphoneModal() {
-  document.getElementById('headphoneModal').style.display = 'flex';
+          function openHeadphoneModal() {
+    document.getElementById('headphoneModal').style.display = 'flex';
 }
 
-// یہ ہینڈل کرے گا کہ یوزر نے 'Yes' کلک کیا یا 'No'
 function confirmHeadphones(hasHeadphones) {
-  // پاپ اپ کو بند کریں
-  document.getElementById('headphoneModal').style.display = 'none';
-  
-  if (hasHeadphones) {
-    // اگر 'Yes' کیا تو آپ کا پرانا سرپرائز والا فنکشن چل جائے گا
-    revealSurprise(); 
-  } else {
-    // اگر 'No' کیا تو یہ پیارا سا الرٹ ائے گا
-    alert("Pehle headphones pehno madam ji! 🎧😜");
-  }
+    // پاپ اپ کو بند کریں
+    document.getElementById('headphoneModal').style.display = 'none';
+    
+    if (hasHeadphones) {
+        // اگر 'Yes' کیا تو سرپرائز کھل جائے گا
+        revealSurprise(); 
+    } else {
+        // اگر 'No' کیا تو یہ پیارا سا الرٹ ائے گا
+        alert("Pehle headphones pehno madam ji! 🎧😜");
+    }
 }
             // پھول گرانے والا فنکشن شروع کریں
             startFlowerFall();
-        }
+       
+		}
 
         // گلابی پھول (Pink Flowers Effect) بنانے کا لاجک
         function startFlowerFall() {
