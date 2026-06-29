@@ -283,7 +283,61 @@
             .birthday-layout { padding: 20px; justify-content: center; }
             .music-player-bar { padding: 15px; }
         }
-    </style>
+   /* پاپ اپ کا اوورلے */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* مین پاپ اپ باکس */
+.modal-box {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  max-width: 350px;
+  width: 85%;
+}
+
+.modal-box h3 {
+  color: #6a1b9a;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.modal-box p {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.yes-btn { background: #6a1b9a; color: white; }
+.no-btn { background: #e0e0e0; color: #333; }
+	
+	
+	
+	</style>
 </head>
 <body>
 <audio id="bg-music" src="Majboor.mp3" loop></audio>
@@ -328,7 +382,17 @@
                 </button>
                 <p class="hint-text">💜 Click the button for your surprise!💜</p>
 				<p class="hint-text"> Madam ji please wear your headphones first before clicking </p>
-            </div>
+            <div id="headphoneModal" class="modal-overlay" style="display: none;">
+    <div class="modal-box">
+      <h3>🎧 Verification Madam Ji!</h3>
+      <p>Did you wear headphones, madam ji? 😜</p>
+      <div class="modal-buttons">
+        <button id="yesBtn" class="modal-btn yes-btn" onclick="confirmHeadphones(true)">Yes, I did! ✔️</button>
+        <button id="noBtn" class="modal-btn no-btn" onclick="confirmHeadphones(false)">No, wait... ❌</button>
+      </div>
+    </div>
+  </div>
+			</div>
 
             <div class="footer-date" id="footer-date-text">
                 Mark Your Calendar: 1 August 2026 📅
@@ -437,7 +501,24 @@ You know, your family was absolutely right—you really are a problem. 😜 But 
             // سرپرائز والا پیج دکھائیں
             const surpriseScreen = document.getElementById("surprise-screen");
             surpriseScreen.style.display = "block";
-            
+            // جب کوئی مین بٹن پر کلک کرے گا، تو یہ پاپ اپ کھولے گا
+function openHeadphoneModal() {
+  document.getElementById('headphoneModal').style.display = 'flex';
+}
+
+// یہ ہینڈل کرے گا کہ یوزر نے 'Yes' کلک کیا یا 'No'
+function confirmHeadphones(hasHeadphones) {
+  // پاپ اپ کو بند کریں
+  document.getElementById('headphoneModal').style.display = 'none';
+  
+  if (hasHeadphones) {
+    // اگر 'Yes' کیا تو آپ کا پرانا سرپرائز والا فنکشن چل جائے گا
+    revealSurprise(); 
+  } else {
+    // اگر 'No' کیا تو یہ پیارا سا الرٹ ائے گا
+    alert("Pehle headphones pehno madam ji! 🎧😜");
+  }
+}
             // پھول گرانے والا فنکشن شروع کریں
             startFlowerFall();
         }
